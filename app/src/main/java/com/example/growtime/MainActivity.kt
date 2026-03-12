@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.example.growtime.ui.theme.GrowTimeTheme
 
-class MainActivity : ComponentActivity() {
+/*class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,6 +34,15 @@ class MainActivity : ComponentActivity() {
                 GrowTimeApp()
             }
         }
+    }
+}*/
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+
     }
 }
 
