@@ -17,6 +17,20 @@ import static androidx.test.espresso.intent.Intents.intended;
 
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 
+// for entering a text
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static org.hamcrest.Matchers.equalTo;
+
+// for ordering
+import org.junit.FixMethodOrder;        // type this manually
+import org.junit.runners.MethodSorters; // type this manually
+
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTestJava {
 
@@ -25,26 +39,28 @@ public class ExampleInstrumentedTestJava {
             new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void recommendButton_opensRecommendScene() {
-
+    public void test1_recommendButton_opensRecommendScene() {
         init();
-
         onView(withId(R.id.RecommendButton)).perform(click());
-
         intended(hasComponent(RecommendSceneActivity.class.getName()));
-
         release();
     }
 
     @Test
-    public void honorsButton_opensHonExtScene() {
+    public void test2_typeInZipCode_shouldWork() {
 
+        onView(withId(R.id.zipcode_input))
+                .perform(replaceText("01852"));
+
+        onView(withId(R.id.zipcode_input))
+                .check(matches(withText("01852")));
+    }
+
+    @Test
+    public void test3_honorsButton_opensHonExtScene() {
         init();
-
         onView(withId(R.id.Honors_button)).perform(click());
-
         intended(hasComponent(HonExtSceneActivity.class.getName()));
-
         release();
     }
 }
