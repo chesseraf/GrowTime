@@ -20,10 +20,26 @@
         android:id="@+id/zipcode_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:hint="Enter Valid U.S Zip Code"
         android:inputType="number"
         android:layout_marginTop="20dp"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/sub_butt"
+        android:text="Submit"
+        android:onClick="updateText"/>
+
+    <TextView
+        android:id="@+id/zip_res"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Zip code will appear here"
+        android:layout_marginTop="20dp"/>
 
 
 </LinearLayout>

@@ -30,6 +30,8 @@ import org.junit.runners.MethodSorters; // type this manually
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTestJava {
@@ -50,10 +52,14 @@ public class ExampleInstrumentedTestJava {
     public void test2_typeInZipCode_shouldWork() {
 
         onView(withId(R.id.zipcode_input))
-                .perform(replaceText("01852"));
+                .perform(replaceText("01852"), closeSoftKeyboard());
 
-        onView(withId(R.id.zipcode_input))
-                .check(matches(withText("01852")));
+        onView(withId(R.id.sub_butt))
+                .check(matches(isDisplayed()))
+                .perform(click());
+
+        onView(withId(R.id.zip_res))
+                .check(matches(withText("Zip: 01852")));
     }
 
     @Test
