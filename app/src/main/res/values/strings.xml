@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GrowTime</string>
+    <string name="hardiness_zone">Hardiness Zone</string>
+    <string name="zip_appear">Zip code will appear here</string>
+    <string name="submit">Submit</string>
+    <string name="inp_zc">Enter Valid U.S. Zip Code</string>
+    <string name="rec_title">GrowTime Plant Recommendation</string>
 </resources>

@@ -8,8 +8,9 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+
     <TextView
-        android:text="GrowTime Plant Recommendation"
+        android:text="@string/rec_title"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -21,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:hint="Enter Valid U.S Zip Code"
+        android:hint="@string/inp_zc"
         android:inputType="number"
         android:layout_marginTop="20dp"/>
 
@@ -30,16 +31,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:id="@+id/sub_butt"
-        android:text="Submit"
-        android:onClick="updateText"/>
+        android:text="@string/submit"/>
 
     <TextView
         android:id="@+id/zip_res"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Zip code will appear here"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:hint="@string/zip_appear"
+        android:minHeight="48dp" />
 
+    <TextView
+        android:id="@+id/hard_zone"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/hardiness_zone"/>
 
 </LinearLayout>
