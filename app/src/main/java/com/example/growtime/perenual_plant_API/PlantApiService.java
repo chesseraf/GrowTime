@@ -9,6 +9,7 @@ public interface PlantApiService {
     @GET("api/species-list")
     Call<PlantResponse> getPlants(
             @Query("key") String apiKey,
-            @Query("q") String query
+            @Query("q") String query,
+            @Query("page") int page
     );
 }

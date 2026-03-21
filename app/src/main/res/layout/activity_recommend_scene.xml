@@ -48,4 +48,13 @@
         android:layout_marginTop="20dp"
         android:hint="@string/hardiness_zone"/>
 
+    <!-- New: displays plant recommendations -->
+    <TextView
+        android:id="@+id/plant_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:hint="Recommended plants will appear here"/>
+
 </LinearLayout>

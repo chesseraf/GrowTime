@@ -20,7 +20,7 @@ public class PlantDataModel implements Serializable {
         return id;
     }
 
-    public String getCommon_name() {
+    public String getCommonName() {
         return common_name;
     }
 
