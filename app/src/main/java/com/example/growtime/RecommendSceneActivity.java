@@ -54,8 +54,27 @@ public class RecommendSceneActivity extends ComponentActivity {
             public void onCallback(DataModel data) {
                 if (data != null) {
                     hard.setText(data.getZone());
+                    String z = data.getZone();
+                    int a = extractZoneNumber(z);
                 }
             }
         });
+    }
+
+    public void showPlants(View view) {
+        String zip = zipcode_input.getText().toString();
+        new ApiCall().getHard(RecommendSceneActivity.this, zip, new ApiCall.CallbackFunction() {
+            @Override
+            public void onCallback(DataModel data) {
+                if (data != null) {
+                    String z = data.getZone();
+                    int a = extractZoneNumber(z);
+                }
+            }
+        });
+    }
+
+    public int extractZoneNumber(String zone) {
+        return Integer.parseInt(zone.replaceAll("[^0-9]", ""));
     }
 }
