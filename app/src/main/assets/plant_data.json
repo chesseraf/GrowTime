@@ -1,0 +1,205 @@
+[
+  {
+    "common_name": "lychee",
+    "waterness": "average",
+    "hardiness" : {
+    "min": "10",
+    "max": "11" }
+  },
+
+  {
+    "common_name": "elephant grass",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "8",
+      "max": "11" }
+  },
+
+  {
+    "common_name": "Orange Daylily",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "3",
+      "max": "9" }
+  },
+
+  {
+    "common_name": "european silver fir",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "7",
+      "max": "7" }
+  },
+
+  {
+    "common_name": "golden pothos",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "10",
+      "max": "12" }
+  },
+
+  {
+    "common_name": "silver willow",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "2",
+      "max": "8" }
+  },
+
+  {
+    "common_name": "mangosteen",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "11",
+      "max": "12" }
+  },
+
+  {
+    "common_name": "red ivy",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "10",
+      "max": "11" }
+  },
+
+  {
+    "common_name": "blood banana",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "9",
+      "max": "11" }
+  },
+
+  {
+    "common_name": "china rose",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "9" }
+  },
+
+
+  {
+    "common_name": "white fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "3",
+      "max": "3" }
+  },
+
+
+  {
+    "common_name": "divi-divi",
+    "waterness": "minimum",
+    "hardiness" : {
+      "min": "10",
+      "max": "12" }
+  },
+
+
+  {
+    "common_name": "asian bell tree",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "10",
+      "max": "12" }
+  },
+  {
+    "common_name": "pyramidalis silver fur",
+    "waterness": "average",
+    "hardiness": {
+      "min": "9",
+      "max": "11"
+    }
+  },
+
+  {
+    "common_name": "noble fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "8",
+      "max": "8" }
+  },
+
+
+  {
+    "common_name": "frans fontaine hornbeam",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "5",
+      "max": "5" }
+  },
+
+  {
+    "common_name": "canidcans white fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "4",
+      "max": "4" }
+  },
+
+  {
+    "common_name": "fraser fir",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "6",
+      "max": "6" }
+  },
+
+  {
+    "common_name": "golden korean fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "6" }
+  },
+
+  {
+    "common_name": "alpine fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "2",
+      "max": "2" }
+  },
+
+  {
+    "common_name": "blue spanish fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "7",
+      "max": "7" }
+  },
+
+  {
+    "common_name": "noble fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "8",
+      "max": "8" }
+  },
+
+  {
+    "common_name": "Johin Japanese Maple",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "6" }
+  },
+
+  {
+    "common_name": "snakebark maple",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "6"}
+  },
+
+  {
+    "common_name": "amur maple",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "2",
+      "max": "2" }
+  }
+]
