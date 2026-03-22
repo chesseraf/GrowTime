@@ -15,7 +15,7 @@ public class CheckPlant {
             int max = pL.get(i).getH().getMax();
 
             if (count == 5) {break;}
-            if (hard_zone >= min || hard_zone <= max) {
+            if (hard_zone >= min && hard_zone <= max) {
                 count++;
                 setPlantContents(suitableP, pL, i);
             }

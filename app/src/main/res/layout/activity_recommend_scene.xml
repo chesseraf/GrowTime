@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView 
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:id="@+id/main"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="16dp">
 
 
@@ -58,5 +58,19 @@
             android:drawablePadding="4dp"
             android:scaleType="fitCenter" />
 
+        <TextView
+            android:text="@string/RecommendPlants"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
     </LinearLayout>
-</HorizontalScrollView>
+</ScrollView>
