@@ -46,13 +46,13 @@ public class AccessJson {
 
                 // Get basic fields
                 String commonName = obj.getString("common_name");
-                String watering = obj.getString("watering");
+                String watering = obj.getString("waterness");
                 String imageUrl = obj.getString("image_url");
 
                 // Get hardiness object
                 JSONObject hardinessObj = obj.getJSONObject("hardiness");
-                int min = hardinessObj.getInt("min");
-                int max = hardinessObj.getInt("max");
+                int min = Integer.parseInt(hardinessObj.getString("min"));
+                int max = Integer.parseInt(hardinessObj.getString("max"));
 
                 Hardiness hardiness = new Hardiness(min, max);
 

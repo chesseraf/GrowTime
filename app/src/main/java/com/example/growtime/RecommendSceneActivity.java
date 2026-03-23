@@ -11,6 +11,7 @@ import androidx.activity.ComponentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -73,7 +74,7 @@ public class RecommendSceneActivity extends ComponentActivity {
         });
     }
 
-    public void showPlants(View view) {
+/*    public void showPlants(View view) {
         String zip = zipcode_input.getText().toString();
         new ApiCall().getHard(RecommendSceneActivity.this, zip, new ApiCall.CallbackFunction() {
             @Override
@@ -94,6 +95,34 @@ public class RecommendSceneActivity extends ComponentActivity {
                     // ✅ Display in RecyclerView
                     displaySuitable(suitable);
 
+                }
+            }
+        });
+    }*/
+
+    public void showPlants(View view) {
+        String zip = zipcode_input.getText().toString();
+        new ApiCall().getHard(RecommendSceneActivity.this, zip, new ApiCall.CallbackFunction() {
+            @Override
+            public void onCallback(DataModel data) {
+                if (data != null) {
+                    String z = data.getZone();
+                    Log.d("DEBUG", "Zone string: " + z);
+
+                    int zone = extractZoneNumber(z);
+                    Log.d("DEBUG", "Zone number: " + zone);
+
+                    AccessJson accessJson = new AccessJson(RecommendSceneActivity.this);
+                    List<Plant> plants = accessJson.parseJSON();
+                    Log.d("DEBUG", "Plants parsed: " + plants.size());
+
+                    CheckPlant check = new CheckPlant();
+                    List<Plant> suitable = check.AddPlant(plants, zone);
+                    Log.d("DEBUG", "Suitable plants: " + suitable.size());
+
+                    displaySuitable(suitable);
+                } else {
+                    Log.d("DEBUG", "data is null");
                 }
             }
         });

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 public class DataModel implements Serializable {
     private String zone;
     private String temperature_zone;
-    private Coordinates c;
+    private Coordinates coordinates;
 
-    public DataModel(String zone, String temperature_zone, Coordinates c) {
+    public DataModel(String zone, String temperature_zone, Coordinates coordinates) {
         this.zone = zone;
         this.temperature_zone = temperature_zone;
-        this.c = c;
+        this.coordinates = coordinates;
     }
 
     // Returns the zone string (e.g., "6b")
@@ -24,6 +24,6 @@ public class DataModel implements Serializable {
 
     // Returns the nested Coordinates object
     public Coordinates getCoordinates() {
-        return c;
+        return coordinates;
     }
 }

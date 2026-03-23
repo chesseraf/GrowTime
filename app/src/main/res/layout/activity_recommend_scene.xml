@@ -71,6 +71,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"/>
+            android:nestedScrollingEnabled="false"
+            android:minHeight="300dp"/>
     </LinearLayout>
 </ScrollView>
