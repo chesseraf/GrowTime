@@ -1,0 +1,223 @@
+[
+  {
+    "common_name": "lychee",
+    "waterness": "average",
+    "hardiness" : {
+    "min": "10",
+    "max": "11" },
+    "image_url": "https://cdn.britannica.com/18/176518-050-5AB1E61D/lychee-fruits-Southeast-Asia.jpg"
+  },
+
+  {
+    "common_name": "elephant grass",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "8",
+      "max": "11" },
+    "image_url": "https://www.feedipedia.org/sites/default/files/styles/standard__640x480_/public/images/elephant_grass_02.jpg?itok=_hG3AwOl"
+  },
+
+  {
+    "common_name": "Orange Daylily",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "3",
+      "max": "9" },
+    "image_url": "https://www.gardenia.net/wp-content/uploads/2023/05/hemerocallis-fulva-tawny-daylily.webp"
+
+  },
+
+  {
+    "common_name": "european silver fir",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "7",
+      "max": "7" },
+    "image_url": "https://www.conifers.org/pi/ab/a/alba05.jpg"
+  },
+
+  {
+    "common_name": "golden pothos",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "10",
+      "max": "12" },
+    "image_url": "https://nouveauraw.com/wp-content/uploads/2020/01/Pothos-Golden-Pothos-plant-800-great-coloring.png"
+  },
+
+  {
+    "common_name": "silver willow",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "2",
+      "max": "8" },
+    "image_url": "https://ark.greensteps.me/images/attach_resources/2022526/79bc1a-1653554283901.jpg"
+
+  },
+
+  {
+    "common_name": "mangosteen",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "11",
+      "max": "12" },
+    "image_url": "https://cdn.wikifarmer.com/images/detailed/2024/09/art-rachen-PU-WX8hdiqw-unsplash.jpg"
+  },
+
+  {
+    "common_name": "red ivy",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "10",
+      "max": "11" },
+    "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/211774263/original.jpg"
+  },
+
+  {
+    "common_name": "blood banana",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "9",
+      "max": "11" },
+    "image_url": "https://www.monrovia.com/media/catalog/product/cache/7b381462074fb6871f01f9faa7ed2e11/r/e/rest_2_1_2195.webp"
+  },
+
+  {
+    "common_name": "china rose",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "9" },
+    "image_url": "https://cdn.britannica.com/91/239491-050-41193899/red-hibiscus-flower-stamen.jpg"
+  },
+
+
+  {
+    "common_name": "white fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "3",
+      "max": "3" },
+    "image_url": "https://www.buytreeseeds.com/cdn/shop/files/whitefirtree.png?v=1721346603"
+  },
+
+
+  {
+    "common_name": "divi-divi",
+    "waterness": "minimum",
+    "hardiness" : {
+      "min": "10",
+      "max": "12" },
+    "image_url": "https://cdn-thumbs.ohmyprints.net/1/0ae2694b536fe00039d9c5324a1a64cd/817x600/thumbnail/fit.jpg"
+  },
+
+
+  {
+    "common_name": "asian bell tree",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "10",
+      "max": "12" },
+    "image_url": "https://www.healthyhouseplants.com/wp-content/uploads/2024/08/china-doll.jpg"
+  },
+  {
+    "common_name": "pyramidalis silver fir",
+    "waterness": "average",
+    "hardiness": {
+      "min": "9",
+      "max": "11"
+    },
+    "image_url": "https://www.campbellsnursery.com/wp-content/uploads/2020/08/Abies-alba-Pyramidalis_4144-2.jpg"
+  },
+
+  {
+    "common_name": "noble fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "8",
+      "max": "8" },
+    "image_url": "https://cdn.santasons.com/wp-content/uploads/2024/08/Premium-67-Noble-Fir-scaled.jpg"
+  },
+
+
+  {
+    "common_name": "frans fontaine hornbeam",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "5",
+      "max": "5" },
+    "image_url": "https://plants.oaklandnursery.com/Content/Images/Photos/H149-24.jpg"
+  },
+
+  {
+    "common_name": "canidcans white fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "4",
+      "max": "4" },
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkrfFZROloSQkrNPPPDDkE7hhWB_7oNzzfvg&s"
+  },
+
+  {
+    "common_name": "fraser fir",
+    "waterness": "frequent",
+    "hardiness" : {
+      "min": "6",
+      "max": "6" },
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Fraser_Fir.JPG/250px-Fraser_Fir.JPG"
+  },
+
+  {
+    "common_name": "golden korean fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "6" },
+    "image_url": "https://www.thetreecenter.com/c/uploads/2022/01/Golden_Korean_Fir_2-copy-600x600.jpg"
+  },
+
+  {
+    "common_name": "alpine fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "2",
+      "max": "2" },
+    "image_url": "https://woodbrooknativeplantnursery.com/wp-content/uploads/2019/07/AbLx2-2007-09-06_2-scaled.jpg"
+  },
+
+  {
+    "common_name": "blue spanish fir",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "7",
+      "max": "7" },
+    "image_url": "https://www.thetreecenter.com/c/uploads/Blue_Spanish_Fir_01-600x900.jpg"
+  },
+
+  {
+    "common_name": "Johin Japanese Maple",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "6" },
+    "image_url": "https://m.media-amazon.com/images/I/51S687O25HL._AC_UF894,1000_QL80_.jpg"
+  },
+
+  {
+    "common_name": "snakebark maple",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "6",
+      "max": "6"},
+    "image_url": "https://i.ebayimg.com/images/g/HrgAAOSwpbNgHs5H/s-l1200.png"
+  },
+
+  {
+    "common_name": "amur maple",
+    "waterness": "average",
+    "hardiness" : {
+      "min": "2",
+      "max": "2" },
+    "image_url": "https://131935859.cdn6.editmysite.com/uploads/1/3/1/9/131935859/6OVYY4IZVPSXCC3METBU3CEJ.jpeg"
+  }
+]
