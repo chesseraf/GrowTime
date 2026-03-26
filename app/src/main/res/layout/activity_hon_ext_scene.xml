@@ -32,6 +32,21 @@
             android:inputType="text"
             android:layout_marginTop="20dp"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/sub_hon"
+            android:text="@string/submit"/>
+
+        <TextView
+            android:id="@+id/hon_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/zip_appear"
+            android:minHeight="48dp" />
+
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
