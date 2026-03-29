@@ -1,17 +1,39 @@
 package com.example.growtime;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends ComponentActivity {
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize Notification Channel
+        NotificationHelper.createNotificationChannel(this);
+
+        // Request permission for Android 13+
+        checkNotificationPermission();
 
         findViewById(R.id.RecommendButton).setOnClickListener(v ->
                 startActivity(new Intent(this, RecommendSceneActivity.class)));
@@ -30,8 +52,17 @@ public class MainActivity extends ComponentActivity {
 
         findViewById(R.id.editPlantHome).setOnClickListener(v ->
                 startActivity(new Intent(this, EditPlantSceneActivity.class)));
-        // Eventually this screen will be removed and start at another screen
-        // startActivity(new Intent(this, RecommendSceneActivity.class));
-        // finish();
+
+        findViewById(R.id.testNotificationButton).setOnClickListener(v ->
+                NotificationHelper.sendNotification(this, "GrowTime Reminder", "Don't forget to water your plants!"));
+    }
+
+    private void checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 }
