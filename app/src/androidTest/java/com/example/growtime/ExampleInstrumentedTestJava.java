@@ -110,4 +110,28 @@ public class ExampleInstrumentedTestJava {
         intended(hasComponent(EditPlantSceneActivity.class.getName()));
         release();
     }
+
+    @Test
+    public void test11_navRec_opensRecommendScene() {
+        init();
+        onView(withId(R.id.nav_recommend)).perform(click());
+        intended(hasComponent(RecommendSceneActivity.class.getName()));
+        release();
+    }
+
+    @Test
+    public void test12_navHonors_opensHonExitScene() {
+        init();
+        onView(withId(R.id.nav_honors)).perform(click());
+        intended(hasComponent(HonExtSceneActivity.class.getName()));
+        release();
+    }
+
+    @Test
+    public void test13_navMyPlants_openMyPlantsScene() {
+        init();
+        onView(withId(R.id.nav_my_plants)).perform(click());
+        intended(hasComponent(MyPlantsSceneActivity.class.getName()));
+        release();
+    }
 }
