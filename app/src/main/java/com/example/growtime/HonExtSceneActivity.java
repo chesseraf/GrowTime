@@ -5,26 +5,38 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.ComponentActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.growtime.access_hardiness_zone.ApiCall;
 import com.example.growtime.access_hardiness_zone.DataModel;
 import com.example.growtime.json_accessing.AccessJson;
+import com.example.growtime.json_accessing.MyGardenStore;
 import com.example.growtime.json_accessing.Plant;
+import com.example.growtime.json_accessing.PlantAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HonExtSceneActivity extends ComponentActivity {
 
     TextView p_name;
     TextView hon;
+    EditText zip_input;
+    List<Plant> s;
+
+    RecyclerView recyclerView;
+    private MyGardenStore gardenStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +44,15 @@ public class HonExtSceneActivity extends ComponentActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_hon_ext_scene);
 
+        gardenStore = new MyGardenStore(this);
+
+        recyclerView = findViewById(R.id.hon_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        zip_input = findViewById(R.id.h_zipcode_input);
         p_name = findViewById(R.id.plant_name);
         hon = findViewById(R.id.hon_result);
+
 
         Button button = findViewById(R.id.sub_hon);
         button.setOnClickListener(v -> {
@@ -65,9 +84,10 @@ public class HonExtSceneActivity extends ComponentActivity {
     public void analyze(View view) {
         String plant_name = p_name.getText().toString();
         String l_plant = plant_name.toLowerCase();
-        String temp_zip = "01844";
+        // String temp_zip = "01844";
+        String in_zip = zip_input.getText().toString();
 
-        new ApiCall().getHard(HonExtSceneActivity.this, temp_zip, new ApiCall.CallbackFunction() {
+        new ApiCall().getHard(HonExtSceneActivity.this, in_zip, new ApiCall.CallbackFunction() {
             @Override
             public void onCallback(DataModel data) {
                 if (data != null) {
@@ -82,6 +102,7 @@ public class HonExtSceneActivity extends ComponentActivity {
                     Log.d("DEBUG", "Plants parsed: " + plants.size());
 
                     iterate_json(plants, l_plant, zone);
+                    displaySuitable(s);
                 }
             }
         });
@@ -92,19 +113,43 @@ public class HonExtSceneActivity extends ComponentActivity {
     }
 
     public void iterate_json(List<Plant> p, String n, int zone) {
-        // CheckPlant pl = new CheckPlant();
         for (int i = 0; i < p.size(); i++) {
             int min = p.get(i).getH().getMin();
             int max = p.get(i).getH().getMax();
             if (p.get(i).getCommon_name().equals(n)) {
                 if (zone >= min && zone <= max) {
                     hon.setText(n + " can be suitably grown here\n");
+                    s = flagPlant(p.get(i));
+                    return;
                 } else if (zone < min) {
                     hon.setText("It's too cold for " + n + " to be grown here\n");
+                    return;
                 } else {
                     hon.setText("It's too hot for " + n + " to be grown here\n");
+                    return;
                 }
             }
+            hon.setText(n.substring(0, 1).toUpperCase() + n.substring(1)  + " is not in the local plant database\n");
         }
+    }
+
+    public List<Plant> flagPlant(Plant p) {
+        List<Plant> res = new ArrayList<>();
+        res.add(p);
+        return res;
+    }
+
+    public void displaySuitable(List<Plant> p) {
+        runOnUiThread(() -> {
+            PlantAdapter adapter = new PlantAdapter(this, p, plant -> {
+                boolean added = gardenStore.addIfMissing(plant);
+                Toast.makeText(
+                        this,
+                        added ? getString(R.string.added_to_my_garden) : getString(R.string.already_in_my_garden),
+                        Toast.LENGTH_SHORT
+                ).show();
+            });
+            recyclerView.setAdapter(adapter);
+        });
     }
 }
