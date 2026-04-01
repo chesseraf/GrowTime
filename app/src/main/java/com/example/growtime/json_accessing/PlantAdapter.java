@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,14 +15,25 @@ import com.bumptech.glide.Glide;
 import com.example.growtime.R;  // ✅ your actual package
 
 import java.util.List;
+
 public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHolder> {
 
-    private List<Plant> plantList;
-    private Context context;
+    public interface OnAddToGardenListener {
+        void onAddToGarden(Plant plant);
+    }
+
+    private final List<Plant> plantList;
+    private final Context context;
+    private final OnAddToGardenListener addToGardenListener;
 
     public PlantAdapter(Context context, List<Plant> plantList) {
+        this(context, plantList, null);
+    }
+
+    public PlantAdapter(Context context, List<Plant> plantList, OnAddToGardenListener addToGardenListener) {
         this.context = context;
         this.plantList = plantList;
+        this.addToGardenListener = addToGardenListener;
     }
 
     @NonNull
@@ -42,6 +54,14 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
         Glide.with(context)
                 .load(plant.getImage_url())
                 .into(holder.image);
+
+        if (addToGardenListener != null) {
+            holder.addToGarden.setVisibility(View.VISIBLE);
+            holder.addToGarden.setOnClickListener(v -> addToGardenListener.onAddToGarden(plant));
+        } else {
+            holder.addToGarden.setVisibility(View.GONE);
+            holder.addToGarden.setOnClickListener(null);
+        }
     }
 
     @Override
@@ -52,12 +72,14 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
     public static class PlantViewHolder extends RecyclerView.ViewHolder {
         TextView name, watering;
         ImageView image;
+        Button addToGarden;
 
         public PlantViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.plant_name);
             watering = itemView.findViewById(R.id.plant_watering);
             image = itemView.findViewById(R.id.plant_image);
+            addToGarden = itemView.findViewById(R.id.btn_add_to_garden);
         }
     }
 }

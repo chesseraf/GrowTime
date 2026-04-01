@@ -12,4 +12,8 @@
     <string name="CanIGrowThisHere">Can I Grow This Here?</string>
     <string name="AddPlant">Add Plant</string>
     <string name="EditPlant">Edit Plant</string>
+    <string name="add_to_my_garden">Add to My Garden</string>
+    <string name="added_to_my_garden">Added to My Garden</string>
+    <string name="already_in_my_garden">Already in My Garden</string>
+    <string name="my_garden_empty">No plants yet. Add some from Recommendations.</string>
 </resources>

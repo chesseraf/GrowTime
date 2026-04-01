@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.view.View;
 
 import com.example.growtime.access_hardiness_zone.ApiCall;
@@ -19,6 +20,7 @@ import com.example.growtime.access_hardiness_zone.DataModel;
 import com.example.growtime.json_accessing.AccessJson;
 import com.example.growtime.json_accessing.CheckPlant;
 import com.example.growtime.json_accessing.Plant;
+import com.example.growtime.json_accessing.MyGardenStore;
 import com.example.growtime.json_accessing.PlantAdapter;
 
 import java.util.List;
@@ -31,12 +33,15 @@ public class RecommendSceneActivity extends ComponentActivity {
     TextView hard;
 
     RecyclerView recyclerView;
+    private MyGardenStore gardenStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_recommend_scene);
+
+        gardenStore = new MyGardenStore(this);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -144,7 +149,14 @@ public class RecommendSceneActivity extends ComponentActivity {
 
     public void displaySuitable(List<Plant> p) {
         runOnUiThread(() -> {
-            PlantAdapter adapter = new PlantAdapter(this, p);
+            PlantAdapter adapter = new PlantAdapter(this, p, plant -> {
+                boolean added = gardenStore.addIfMissing(plant);
+                Toast.makeText(
+                        this,
+                        added ? getString(R.string.added_to_my_garden) : getString(R.string.already_in_my_garden),
+                        Toast.LENGTH_SHORT
+                ).show();
+            });
             recyclerView.setAdapter(adapter);
         });
     }
