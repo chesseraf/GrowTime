@@ -66,7 +66,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
 
     @Override
     public int getItemCount() {
-        return plantList.size();
+        return (plantList == null) ? 0 : plantList.size();
     }
 
     public static class PlantViewHolder extends RecyclerView.ViewHolder {
