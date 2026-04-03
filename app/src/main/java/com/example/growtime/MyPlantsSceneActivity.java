@@ -60,7 +60,9 @@ public class MyPlantsSceneActivity extends ComponentActivity {
         emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
         recyclerView.setVisibility(empty ? View.GONE : View.VISIBLE);
         if (!empty) {
-            recyclerView.setAdapter(new PlantAdapter(this, plants));
+            recyclerView.setAdapter(new PlantAdapter(this, plants, null, plant -> {
+                startActivity(new Intent(this, EditPlantSceneActivity.class));
+            }));
         }
     }
 }

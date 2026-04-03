@@ -22,18 +22,28 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
         void onAddToGarden(Plant plant);
     }
 
+    public interface OnEditPlantListener {
+        void onEditPlant(Plant plant);
+    }
+
     private final List<Plant> plantList;
     private final Context context;
     private final OnAddToGardenListener addToGardenListener;
+    private final OnEditPlantListener editPlantListener;
 
     public PlantAdapter(Context context, List<Plant> plantList) {
-        this(context, plantList, null);
+        this(context, plantList, null, null);
     }
 
     public PlantAdapter(Context context, List<Plant> plantList, OnAddToGardenListener addToGardenListener) {
+        this(context, plantList, addToGardenListener, null);
+    }
+
+    public PlantAdapter(Context context, List<Plant> plantList, OnAddToGardenListener addToGardenListener, OnEditPlantListener editPlantListener) {
         this.context = context;
         this.plantList = plantList;
         this.addToGardenListener = addToGardenListener;
+        this.editPlantListener = editPlantListener;
     }
 
     @NonNull
@@ -62,6 +72,14 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
             holder.addToGarden.setVisibility(View.GONE);
             holder.addToGarden.setOnClickListener(null);
         }
+
+        if (editPlantListener != null) {
+            holder.editPlant.setVisibility(View.VISIBLE);
+            holder.editPlant.setOnClickListener(v -> editPlantListener.onEditPlant(plant));
+        } else {
+            holder.editPlant.setVisibility(View.GONE);
+            holder.editPlant.setOnClickListener(null);
+        }
     }
 
     @Override
@@ -73,6 +91,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
         TextView name, watering;
         ImageView image;
         Button addToGarden;
+        Button editPlant;
 
         public PlantViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +99,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
             watering = itemView.findViewById(R.id.plant_watering);
             image = itemView.findViewById(R.id.plant_image);
             addToGarden = itemView.findViewById(R.id.btn_add_to_garden);
+            editPlant = itemView.findViewById(R.id.btn_edit_plant);
         }
     }
 }
