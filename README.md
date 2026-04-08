@@ -51,7 +51,7 @@ This allows users to choose appropriate plants and maintain them successfully.
 
 ### 🌍 Location-Based Plant Recommendations
 
-Uses a user's **zip code or device location** to recommend plants that grow well in their local soil.
+Uses a user's **zip code** to recommend plants that grow well in their local soil.
 
 ### 🌱 Plant Collection Management
 
@@ -189,7 +189,7 @@ The code for the tests is in the folder "app\src\androidTest\java\com\example\gr
 # 🚀 Usage
 
 1. Launch GrowTime.
-2. Enter your **zip code** or enable **location services**.
+2. Enter your **zip code**.
 3. Browse recommended plants suitable for your region.
 4. Add plants to your **plant collection**.
 5. Receive reminders when plants need watering.
