@@ -34,8 +34,4 @@ public class AddPlantSceneActivity extends ComponentActivity {
             return true;
         });
     }
-
-    public void addPlant(View view) {
-        // TODO save the plant
-    }
 }
