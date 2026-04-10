@@ -21,6 +21,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/plant_indoor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/plant_reminders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/plant_last_watered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/btn_add_to_garden"
         android:layout_width="match_parent"
@@ -29,11 +47,24 @@
         android:text="@string/add_to_my_garden"
         android:visibility="gone" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_edit_plant"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:text="@string/EditPlant"
+        android:src="@drawable/edit"
+        android:scaleType="fitCenter"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Edit plant"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/btn_water_plant"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/water"
+        android:scaleType="fitCenter"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Water plant"
         android:visibility="gone" />
 </LinearLayout>

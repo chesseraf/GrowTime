@@ -22,6 +22,7 @@ import com.example.growtime.json_accessing.CheckPlant;
 import com.example.growtime.json_accessing.Plant;
 import com.example.growtime.json_accessing.MyGardenStore;
 import com.example.growtime.json_accessing.PlantAdapter;
+import com.example.growtime.json_accessing.ZipcodeStore;
 
 import java.util.List;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,6 +35,7 @@ public class RecommendSceneActivity extends ComponentActivity {
 
     RecyclerView recyclerView;
     private MyGardenStore gardenStore;
+    private ZipcodeStore zipcodeStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +44,17 @@ public class RecommendSceneActivity extends ComponentActivity {
         setContentView(R.layout.activity_recommend_scene);
 
         gardenStore = new MyGardenStore(this);
+        zipcodeStore = new ZipcodeStore(this);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         zipcode_input = findViewById(R.id.zipcode_input);
+
+        String savedZip = zipcodeStore.load();
+        if (!savedZip.isEmpty()) {
+            zipcode_input.setText(savedZip);
+        }
         zip_res = findViewById(R.id.zip_res);
         hard = findViewById(R.id.hard_zone);
 
@@ -75,6 +83,7 @@ public class RecommendSceneActivity extends ComponentActivity {
     public void updateText(View view) {
         String zip = zipcode_input.getText().toString();
         zip_res.setText("Zip: " + zip);
+        zipcodeStore.save(zip);
     }
 
     public void showZone(View view) {

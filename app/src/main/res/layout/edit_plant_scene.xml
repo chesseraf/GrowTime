@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -17,8 +17,8 @@
         <LinearLayout
             android:id="@+id/main"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="16dp">
 
             <TextView
@@ -33,83 +33,85 @@
                 android:id="@+id/zip_res"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/zip_appear"
-                android:minHeight="48dp" />
+                android:layout_marginTop="12dp"
+                android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="155dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Plant picture goes here" />
-
-            <TextView
-                android:id="@+id/hard_zone"
-                android:layout_width="155dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Plantname"/>
-
-            <TextView
-                android:layout_width="193dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Get watering reminders" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/textView"
+            <ImageView
+                android:id="@+id/edit_plant_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="indoor" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="180dp"
+                android:layout_marginTop="12dp"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Watering frequency" />
+                android:layout_marginTop="16dp"
+                android:text="Plant name" />
+
+            <EditText
+                android:id="@+id/edit_plant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
 
             <TextView
-                android:layout_width="182dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="20dp"
-                android:hint="# of days - modifiable" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Watering frequency (days)" />
+
+            <EditText
+                android:id="@+id/edit_water_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLines="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Get watering reminders" />
+
+            <CheckBox
+                android:id="@+id/checkbox_reminders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Indoor" />
+
+            <CheckBox
+                android:id="@+id/checkbox_indoor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/Save_edit"
-                android:layout_width="145dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="4dp"
-                android:scaleType="fitCenter"
+                android:layout_marginTop="20dp"
                 android:text="Save" />
 
             <Button
                 android:id="@+id/cancel_edit"
-                android:layout_width="144dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="4dp"
-                android:scaleType="fitCenter"
                 android:text="Cancel" />
 
             <Button
                 android:id="@+id/delete_plant"
-                android:layout_width="144dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="4dp"
-                android:scaleType="fitCenter"
-                android:text="delete" />
+                android:text="Delete" />
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

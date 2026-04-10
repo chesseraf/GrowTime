@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Persists plants the user adds from recommendations into "My Garden".
+ * Persists the user's garden as a JSON array in SharedPreferences.
+ * Each entry is a StoredPlant (plant data + user settings like indoor, reminders, water schedule).
  */
 public class MyGardenStore {
 
@@ -24,8 +25,9 @@ public class MyGardenStore {
         prefs = context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 
-    public List<Plant> load() {
-        List<Plant> out = new ArrayList<>();
+    /** Loads all stored plants. Returns an empty list if nothing has been saved yet. */
+    public List<StoredPlant> load() {
+        List<StoredPlant> out = new ArrayList<>();
         String raw = prefs.getString(KEY_PLANTS, null);
         if (raw == null || raw.isEmpty()) {
             return out;
@@ -40,7 +42,14 @@ public class MyGardenStore {
                 JSONObject hardinessObj = obj.getJSONObject("hardiness");
                 int min = Integer.parseInt(hardinessObj.getString("min"));
                 int max = Integer.parseInt(hardinessObj.getString("max"));
-                out.add(new Plant(commonName, watering, imageUrl, new Hardiness(min, max)));
+                Plant plant = new Plant(commonName, watering, imageUrl, new Hardiness(min, max));
+                StoredPlant sp = new StoredPlant(plant);
+                sp.getReminders = obj.getBoolean("getReminders");
+                sp.indoor = obj.getBoolean("indoor");
+                sp.water_days = obj.getInt("water_days");
+                sp.dateAddedMillis = obj.optLong("date_added", sp.dateAddedMillis);
+                sp.lastWateredMillis = obj.optLong("last_watered", sp.lastWateredMillis);
+                out.add(sp);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,26 +58,70 @@ public class MyGardenStore {
     }
 
     /**
-     * @return true if the plant was newly added, false if it was already in the garden
+     * Adds the plant to the garden if it is not already present (matched by name).
+     * @return true if the plant was newly added, false if it was already in the garden.
      */
     public boolean addIfMissing(Plant plant) {
-        List<Plant> current = load();
+        List<StoredPlant> current = load();
         String name = plant.getCommon_name();
-        for (Plant p : current) {
-            if (p.getCommon_name().equalsIgnoreCase(name)) {
+        for (StoredPlant sp : current) {
+            if (sp.plant.getCommon_name().equalsIgnoreCase(name)) {
                 return false;
             }
         }
-        current.add(plant);
+        current.add(new StoredPlant(plant));
         saveAll(current);
         return true;
     }
 
-    private void saveAll(List<Plant> plants) {
+    /**
+     * Updates the editable fields of a stored plant identified by its original name.
+     * A new StoredPlant is constructed rather than mutating in-place because
+     * StoredPlant.plant is final.
+     */
+    public void update(String originalName, String newName, int waterDays, boolean indoor, boolean getReminders) {
+        List<StoredPlant> current = load();
+        for (int i = 0; i < current.size(); i++) {
+            StoredPlant sp = current.get(i);
+            if (sp.plant.getCommon_name().equalsIgnoreCase(originalName)) {
+                Plant updated = new Plant(newName, sp.plant.getWaterness(), sp.plant.getImage_url(), sp.plant.getH());
+                StoredPlant replacement = new StoredPlant(updated);
+                replacement.getReminders = getReminders;
+                replacement.indoor = indoor;
+                replacement.water_days = waterDays;
+                replacement.dateAddedMillis = sp.dateAddedMillis;
+                replacement.lastWateredMillis = sp.lastWateredMillis;
+                current.set(i, replacement);
+                break;
+            }
+        }
+        saveAll(current);
+    }
+
+    /** Records the current time as the last-watered date for the named plant. */
+    public void updateLastWatered(String commonName) {
+        List<StoredPlant> current = load();
+        for (StoredPlant sp : current) {
+            if (sp.plant.getCommon_name().equalsIgnoreCase(commonName)) {
+                sp.lastWateredMillis = System.currentTimeMillis();
+                break;
+            }
+        }
+        saveAll(current);
+    }
+
+    /** Permanently removes a plant from the garden by name. */
+    public void remove(String commonName) {
+        List<StoredPlant> current = load();
+        current.removeIf(sp -> sp.plant.getCommon_name().equalsIgnoreCase(commonName));
+        saveAll(current);
+    }
+
+    private void saveAll(List<StoredPlant> plants) {
         JSONArray arr = new JSONArray();
-        for (Plant p : plants) {
+        for (StoredPlant sp : plants) {
             try {
-                arr.put(plantToJson(p));
+                arr.put(storedPlantToJson(sp));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -76,8 +129,9 @@ public class MyGardenStore {
         prefs.edit().putString(KEY_PLANTS, arr.toString()).apply();
     }
 
-    private static JSONObject plantToJson(Plant p) throws JSONException {
+    private static JSONObject storedPlantToJson(StoredPlant sp) throws JSONException {
         JSONObject o = new JSONObject();
+        Plant p = sp.plant;
         o.put("common_name", p.getCommon_name());
         o.put("waterness", p.getWaterness());
         o.put("image_url", p.getImage_url());
@@ -85,6 +139,11 @@ public class MyGardenStore {
         h.put("min", String.valueOf(p.getH().getMin()));
         h.put("max", String.valueOf(p.getH().getMax()));
         o.put("hardiness", h);
+        o.put("getReminders", sp.getReminders);
+        o.put("indoor", sp.indoor);
+        o.put("water_days", sp.water_days);
+        o.put("date_added", sp.dateAddedMillis);
+        o.put("last_watered", sp.lastWateredMillis);
         return o;
     }
 }

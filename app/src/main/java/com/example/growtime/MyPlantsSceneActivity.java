@@ -9,9 +9,9 @@ import androidx.activity.ComponentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.growtime.json_accessing.GardenPlantAdapter;
 import com.example.growtime.json_accessing.MyGardenStore;
-import com.example.growtime.json_accessing.Plant;
-import com.example.growtime.json_accessing.PlantAdapter;
+import com.example.growtime.json_accessing.StoredPlant;
 
 import java.util.List;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -55,13 +55,23 @@ public class MyPlantsSceneActivity extends ComponentActivity {
     }
 
     private void refreshGardenList() {
-        List<Plant> plants = gardenStore.load();
+        List<StoredPlant> plants = gardenStore.load();
         boolean empty = plants.isEmpty();
         emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
         recyclerView.setVisibility(empty ? View.GONE : View.VISIBLE);
         if (!empty) {
-            recyclerView.setAdapter(new PlantAdapter(this, plants, null, plant -> {
-                startActivity(new Intent(this, EditPlantSceneActivity.class));
+            recyclerView.setAdapter(new GardenPlantAdapter(this, plants, sp -> {
+                Intent intent = new Intent(this, EditPlantSceneActivity.class);
+                intent.putExtra("plant_name", sp.plant.getCommon_name());
+                intent.putExtra("image_url", sp.plant.getImage_url());
+                intent.putExtra("indoor", sp.indoor);
+                intent.putExtra("get_reminders", sp.getReminders);
+                intent.putExtra("water_days", sp.water_days);
+                intent.putExtra("last_watered", sp.lastWateredMillis);
+                startActivity(intent);
+            }, sp -> {
+                gardenStore.updateLastWatered(sp.plant.getCommon_name());
+                refreshGardenList();
             }));
         }
     }
