@@ -19,7 +19,7 @@ The app reduces the frustration many beginner gardeners face by combining plant 
 * [Architecture](#architecture)
 * [Tech Stack](#tech-stack)
 * [Installation](#installation)
-* [Testing](#Building-and-testing)
+* [Continuous integration](#Building-and-testing)
 * [Usage](#usage)
 * [Evaluation](#evaluation)
 * [Future Improvements](#future-improvements)
@@ -182,6 +182,11 @@ To run automated tests and build, run the following command:
 ```
 If the build fails, it will show which tests failed. While it is running, you can see what some of the tests are doing on the device shown on the right side of the screen.
 
+To just build after making some changes, run:
+```
+./gradlew build
+```
+To have the program launched in the emulator, the play button still needs to be clicked in the GUI of Android Studio because the emulator runs inside of it.
 
 # Coding tests
 The code for the tests is in the folder "app\src\androidTest\java\com\example\growtime"
