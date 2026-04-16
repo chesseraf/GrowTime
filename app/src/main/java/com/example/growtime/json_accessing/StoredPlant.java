@@ -11,6 +11,8 @@ public class StoredPlant {
     public int water_days;               // how often to water, in days
     public long dateAddedMillis;         // epoch ms when the plant was added to the garden
     public long lastWateredMillis;       // epoch ms of the most recent watering
+    /** Outdoor: set when marking watered if 7-day forecast rain is above threshold; consumed later by reminders. */
+    public boolean skipNextWateringDueToRain = false;
 
     public StoredPlant(Plant p) {
         plant = p;

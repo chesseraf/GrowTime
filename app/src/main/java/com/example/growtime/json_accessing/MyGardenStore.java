@@ -49,6 +49,7 @@ public class MyGardenStore {
                 sp.water_days = obj.getInt("water_days");
                 sp.dateAddedMillis = obj.optLong("date_added", sp.dateAddedMillis);
                 sp.lastWateredMillis = obj.optLong("last_watered", sp.lastWateredMillis);
+                sp.skipNextWateringDueToRain = obj.optBoolean("skip_next_water_rain", false);
                 out.add(sp);
             }
         } catch (Exception e) {
@@ -91,6 +92,7 @@ public class MyGardenStore {
                 replacement.water_days = waterDays;
                 replacement.dateAddedMillis = sp.dateAddedMillis;
                 replacement.lastWateredMillis = sp.lastWateredMillis;
+                replacement.skipNextWateringDueToRain = sp.skipNextWateringDueToRain;
                 current.set(i, replacement);
                 break;
             }
@@ -100,10 +102,19 @@ public class MyGardenStore {
 
     /** Records the current time as the last-watered date for the named plant. */
     public void updateLastWatered(String commonName) {
+        markWateredWithRainDecision(commonName, false);
+    }
+
+    /**
+     * Sets last watered to now and stores whether the next watering cycle should be skipped
+     * (e.g. outdoor plant with enough forecast rain). Notifications can read {@code skipNextWateringDueToRain} later.
+     */
+    public void markWateredWithRainDecision(String commonName, boolean skipNextWateringDueToRain) {
         List<StoredPlant> current = load();
         for (StoredPlant sp : current) {
             if (sp.plant.getCommon_name().equalsIgnoreCase(commonName)) {
                 sp.lastWateredMillis = System.currentTimeMillis();
+                sp.skipNextWateringDueToRain = skipNextWateringDueToRain;
                 break;
             }
         }
@@ -144,6 +155,7 @@ public class MyGardenStore {
         o.put("water_days", sp.water_days);
         o.put("date_added", sp.dateAddedMillis);
         o.put("last_watered", sp.lastWateredMillis);
+        o.put("skip_next_water_rain", sp.skipNextWateringDueToRain);
         return o;
     }
 }

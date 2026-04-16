@@ -68,6 +68,13 @@ public class GardenPlantAdapter extends RecyclerView.Adapter<GardenPlantAdapter.
         holder.lastWatered.setVisibility(View.VISIBLE);
         holder.lastWatered.setText("Last watered: " + DATE_FMT.format(new Date(sp.lastWateredMillis)));
 
+        if (sp.skipNextWateringDueToRain) {
+            holder.rainDefer.setVisibility(View.VISIBLE);
+            holder.rainDefer.setText(R.string.rain_skip_next_cycle_note);
+        } else {
+            holder.rainDefer.setVisibility(View.GONE);
+        }
+
         Glide.with(context).load(plant.getImage_url()).into(holder.image);
         holder.addToGarden.setVisibility(View.GONE);
         holder.editPlant.setVisibility(View.VISIBLE);
@@ -82,7 +89,7 @@ public class GardenPlantAdapter extends RecyclerView.Adapter<GardenPlantAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, watering, indoor, reminders, lastWatered;
+        TextView name, watering, indoor, reminders, lastWatered, rainDefer;
         ImageView image;
         Button addToGarden;
         ImageButton editPlant, waterPlant;
@@ -94,6 +101,7 @@ public class GardenPlantAdapter extends RecyclerView.Adapter<GardenPlantAdapter.
             indoor = itemView.findViewById(R.id.plant_indoor);
             reminders = itemView.findViewById(R.id.plant_reminders);
             lastWatered = itemView.findViewById(R.id.plant_last_watered);
+            rainDefer = itemView.findViewById(R.id.plant_rain_defer);
             image = itemView.findViewById(R.id.plant_image);
             addToGarden = itemView.findViewById(R.id.btn_add_to_garden);
             editPlant = itemView.findViewById(R.id.btn_edit_plant);

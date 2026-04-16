@@ -65,4 +65,11 @@
         android:text="Test Notification"
         android:layout_marginTop="20dp"/>
 
+    <Button
+        android:id="@+id/testWeatherApiButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/test_weather_forecast" />
+
 </LinearLayout>

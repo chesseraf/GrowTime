@@ -13,6 +13,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.ContextCompat;
 
+import com.example.growtime.weather.WeatherForecastRepository;
+
 public class MainActivity extends ComponentActivity {
 
     private final ActivityResultLauncher<String> requestPermissionLauncher =
@@ -55,6 +57,24 @@ public class MainActivity extends ComponentActivity {
 
         findViewById(R.id.testNotificationButton).setOnClickListener(v ->
                 NotificationHelper.sendNotification(this, "GrowTime Reminder", "Don't forget to water your plants!"));
+
+        findViewById(R.id.testWeatherApiButton).setOnClickListener(v ->
+                WeatherForecastRepository.fetchSevenDayTotalPrecipitation(this,
+                        new WeatherForecastRepository.Listener() {
+                            @Override
+                            public void onSuccess(double totalPrecipMm) {
+                                Toast.makeText(
+                                        MainActivity.this,
+                                        getString(R.string.weather_forecast_result, totalPrecipMm),
+                                        Toast.LENGTH_LONG
+                                ).show();
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                            }
+                        }));
     }
 
     private void checkNotificationPermission() {

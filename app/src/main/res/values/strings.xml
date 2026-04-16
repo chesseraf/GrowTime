@@ -16,4 +16,16 @@
     <string name="added_to_my_garden">Added to My Garden</string>
     <string name="already_in_my_garden">Already in My Garden</string>
     <string name="my_garden_empty">No plants yet. Add some from Recommendations.</string>
+    <string name="test_weather_forecast">Test weather (7-day rain)</string>
+    <string name="weather_no_api_key">Add WEATHER_API_KEY to local.properties and sync Gradle.</string>
+    <string name="weather_no_zip">Enter a zip on Recommend and submit first.</string>
+    <string name="weather_http_error">Weather request failed.</string>
+    <string name="weather_forecast_result">Next 7 days total rain: %1$.1f mm</string>
+    <string name="rain_skip_next_cycle_note">Next watering: skipped (≥10 mm rain in next 7 days)</string>
+    <string name="water_checking_forecast">Checking rain forecast…</string>
+    <string name="water_marked_indoor">Marked watered.</string>
+    <string name="water_marked_skip_next">Watered. Next 7 days: %1$.1f mm — next watering skipped.</string>
+    <string name="water_marked_water_next">Watered. Next 7 days: %1$.1f mm — water as usual next cycle.</string>
+    <string name="water_marked_forecast_failed">Watered. Forecast failed (%1$s). Rain skip not applied.</string>
+    <string name="water_marked_no_rain_setup">Watered. Add API key and zip to use rain forecast.</string>
 </resources>
