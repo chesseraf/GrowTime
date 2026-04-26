@@ -8,3 +8,7 @@ instead of false on line 20.
 adb logcat -s output -d >> app_logs.txt;python parse_logs.py;python water_graph.py actual_data.csv
 
 For this to run, the Sdk\platform-tools folder must be in the path of your enviornment variables.
+
+When the emulator is launched, it starts by running this simulation. For the duration of the simulation, the plant list stored in the app is set to a specific group of 3 plant with set options - one needs no reminders, one is outdoors, and one is indoors. Since the simulation is happening over the course of 20 seconds and not 20 days, the amount of rain that occurrs on each of 20 days is just in a hardcoded array. 
+
+Then, 20 days are simulated, one at a time. 250 miliseconds are devoted to each day, and this is used to determine how long its been since the plant was last watered. If the notification algorithm deems it time to water it again, then the log message for this day also includes this plant. The time when the plant was last watered is set to the current system time and stored inside of the plant, with the same function that is used when the user waters the plant. This means that the simulation assumes that the plant was watered when it would be notified to. Once the 20 day cycle is done, the user's actual plants are stored back and overwrite the temporary testing plant set. The logs that were generated are then read with a python script, and converted into a figure by using the command in step 3.
