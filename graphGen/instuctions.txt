@@ -1,0 +1,10 @@
+The actual_data_chart.png contains the figure. If you want to regenerate, the steps to do so are below.
+
+1) In testConfig.java, set 
+TESTING_ENABLED = true;
+instead of false on line 20.
+2) Launch the emulator. Wait until the opening screen is displayed.
+3) Go into the graphGen folder in the terminal run this exact line: 
+adb logcat -s output -d >> app_logs.txt;python parse_logs.py;python water_graph.py actual_data.csv
+
+For this to run, the Sdk\platform-tools folder must be in the path of your enviornment variables.

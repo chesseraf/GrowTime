@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.ContextCompat;
 
+import com.example.growtime.json_accessing.MyGardenStore;
 import com.example.growtime.weather.WeatherForecastRepository;
 
 import androidx.work.OneTimeWorkRequest;
@@ -32,6 +33,8 @@ public class MainActivity extends ComponentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (TestConfig.isTestingEnabled())
+            TestConfig.runTest(new MyGardenStore(this));
         setContentView(R.layout.activity_main);
 
         // Initialize Notification Channel
@@ -84,7 +87,7 @@ public class MainActivity extends ComponentActivity {
                                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
                             }
                         }));
-    }
+                            }
 
     private void checkNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

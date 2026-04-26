@@ -20,7 +20,7 @@
         android:id="@+id/default_zipcode_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Valid U.S Zip Code"
+        android:hint="Enter Your U.S Zip Code"
         android:inputType="number"
         android:layout_marginTop="20dp"/>
 
