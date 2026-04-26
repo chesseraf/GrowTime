@@ -13,17 +13,18 @@ The app reduces the frustration many beginner gardeners face by combining plant 
 
 # 📖 Table of Contents
 
-* [Overview](#overview)
-* [Features](#features)
-* [Screenshots](#screenshots)
-* [Architecture](#architecture)
-* [Tech Stack](#tech-stack)
-* [Installation](#installation)
-* [Continuous integration](#Building-and-testing)
-* [Usage](#usage)
-* [Evaluation](#evaluation)
-* [Future Improvements](#future-improvements)
-* [Team](#team)
+* [Overview](#-overview)
+* [Features](#-features)
+* [GUI](#-gui)
+* [Notification algorithm](notification-algorithm)
+* [Architecture](#-architecture)
+* [Tech Stack](#-tech-stack)
+* [Installation](#-installation)
+* [Continuous integration](#building-and-testing)
+* [Usage](#-usage)
+* [Evaluation](#-evaluation)
+* [Future Improvements](#-future-improvements)
+* [Team](#-team)
 
 ---
 
@@ -77,9 +78,23 @@ The application includes multiple screens:
 
 ---
 
-# 📸 Screenshots
+# 📸 GUI
 
-*(Add screenshots here once the UI is implemented)*
+![Recomendations](./Figures/Recomend_plants.png)
+![My garden](./Figures/My_garden.png)
+![Edit plant](./Figures/Edit_plant.png)
+![Can I grow this here](./Figures/Can_I_grow_this_here.png)
+![Testing screen](./Figures/Testing_screen.png)
+
+---
+# Notification algorithm
+When a plant is indoors, a reminder to water it comes every few days, where the exact number of days depend on the watering frequency of the plant. If it is outdoors, then the plant will consider itself watered if the forcast for then next 7 days contains over 10 mm of rain. If a plant has an option set to not get watering reminders, it will not generate any reminders.
+
+![Notification simulation](./Figures/Simulation_figure.png)
+This figure was produced by running GrowTime with a special testing configuration. Specific instructions to generate it can be found in graphGen/instructions.txt. 
+
+The simulation demonstrates the way our algorithm decides to send notifications based on the time when it rains. The cactus had an option set to not get watering reminders so no reminders were triggered for it. The tulip was marked as indoors, so it recieved a watering reminder every 5 days, regardless of when it rained. The rose was set to recieve a notification every 3 days but it was outside. It needed to be watered on day 6 because it was 3 days after a strong rain. The forcast for the next 7 days showed some rain, but the rainfall totalled to under 10 mm - the rain on day 6 is 3mm and the other yellow dots are about 6 mm. On day 8, it considered itself watered because there were 2 moderate rains in the next 7 days which totaled 10 mm. Between days 10 and 16, the plant considered itself watered because it saw that a strong rain was coming. Finally, it needed to be watered on day 19 because it was 3 days after the strong rain and there was not much rain upcoming.
+
 
 ---
 
