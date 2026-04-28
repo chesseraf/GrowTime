@@ -187,6 +187,7 @@ git clone https://github.com/chesseraf/GrowTime
 Below are some problems that have been encountered and what was done to solve them.
 1. If it says that gradle needs to sync in the top of the screen, let it sync
 2. If the option to run does not appear, it may need to be built. Click the hammer which is the 6th from the bottom in the tool bar on the bottom left corner. Then click the hammer next to it to build. After building, try launching again.
+3. If it complains about the version of the gradle being out of date then Android Studio may need to be updated. To update it, go to the Jet Brains Toolbox and update Android Studio to the latest version.
 
 ---
 
