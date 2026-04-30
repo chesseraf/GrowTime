@@ -11,6 +11,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.IOException;
+
 /**
  * Fetches WeatherAPI.com forecast for the zip saved in {@link ZipcodeStore} and sums daily precipitation.
  */
@@ -27,15 +29,25 @@ public final class WeatherForecastRepository {
     private WeatherForecastRepository() {}
 
     public static void fetchSevenDayTotalPrecipitation(Context context, Listener listener) {
+        new Thread(() -> {
+            try {
+                double totalMm = fetchSevenDayTotalPrecipitationSync(context);
+                postMain(context, () -> listener.onSuccess(totalMm));
+            } catch (Exception e) {
+                postMain(context, () -> listener.onError(e.getMessage()));
+            }
+        }).start();
+    }
+
+    /** Synchronous version for background workers. */
+    public static double fetchSevenDayTotalPrecipitationSync(Context context) throws Exception {
         Context app = context.getApplicationContext();
         if (!WeatherApiConfig.hasApiKey()) {
-            postMain(app, () -> listener.onError(app.getString(R.string.weather_no_api_key)));
-            return;
+            throw new Exception(app.getString(R.string.weather_no_api_key));
         }
         String zip = new ZipcodeStore(app).load().trim();
         if (zip.isEmpty()) {
-            postMain(app, () -> listener.onError(app.getString(R.string.weather_no_zip)));
-            return;
+            throw new Exception(app.getString(R.string.weather_no_zip));
         }
 
         WeatherApiService service = WeatherForecastClient.getRetrofit().create(WeatherApiService.class);
@@ -45,23 +57,11 @@ public final class WeatherForecastRepository {
                 FORECAST_DAYS
         );
 
-        call.enqueue(new Callback<WeatherForecastResponse>() {
-            @Override
-            public void onResponse(Call<WeatherForecastResponse> call, Response<WeatherForecastResponse> response) {
-                if (!response.isSuccessful() || response.body() == null) {
-                    postMain(app, () -> listener.onError(app.getString(R.string.weather_http_error)));
-                    return;
-                }
-                double totalMm = sumPrecipitationMm(response.body());
-                postMain(app, () -> listener.onSuccess(totalMm));
-            }
-
-            @Override
-            public void onFailure(Call<WeatherForecastResponse> call, Throwable t) {
-                String msg = t.getMessage() != null ? t.getMessage() : app.getString(R.string.weather_http_error);
-                postMain(app, () -> listener.onError(msg));
-            }
-        });
+        Response<WeatherForecastResponse> response = call.execute();
+        if (!response.isSuccessful() || response.body() == null) {
+            throw new IOException(app.getString(R.string.weather_http_error));
+        }
+        return sumPrecipitationMm(response.body());
     }
 
     private static double sumPrecipitationMm(WeatherForecastResponse body) {

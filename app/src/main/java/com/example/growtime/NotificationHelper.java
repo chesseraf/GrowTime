@@ -7,6 +7,8 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import java.util.List;
+
 public class NotificationHelper {
     public static final String CHANNEL_ID = "growtime_notifications";
     public static final String CHANNEL_NAME = "GrowTime Reminders";
@@ -25,6 +27,32 @@ public class NotificationHelper {
                 manager.createNotificationChannel(channel);
             }
         }
+    }
+
+    public static void sendWateringReminder(Context context, List<String> plantNames) {
+        if (plantNames == null || plantNames.isEmpty()) return;
+
+        String title = context.getString(R.string.notification_watering_reminder_title);
+        String message;
+        if (plantNames.size() == 1) {
+            message = context.getString(R.string.notification_watering_reminder_single, plantNames.get(0));
+        } else {
+            message = context.getString(R.string.notification_watering_reminder_multiple, String.join(", ", plantNames));
+        }
+        sendNotification(context, title, message);
+    }
+
+    public static void sendRainResetNotification(Context context, List<String> plantNames) {
+        if (plantNames == null || plantNames.isEmpty()) return;
+
+        String title = context.getString(R.string.notification_rain_reset_title);
+        String message;
+        if (plantNames.size() == 1) {
+            message = context.getString(R.string.notification_rain_reset_single, plantNames.get(0));
+        } else {
+            message = context.getString(R.string.notification_rain_reset_multiple, String.valueOf(plantNames.size()));
+        }
+        sendNotification(context, title, message);
     }
 
     public static void sendNotification(Context context, String title, String message) {

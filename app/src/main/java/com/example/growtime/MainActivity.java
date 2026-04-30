@@ -15,6 +15,9 @@ import androidx.core.content.ContextCompat;
 
 import com.example.growtime.weather.WeatherForecastRepository;
 
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 public class MainActivity extends ComponentActivity {
 
     private final ActivityResultLauncher<String> requestPermissionLauncher =
@@ -33,6 +36,9 @@ public class MainActivity extends ComponentActivity {
 
         // Initialize Notification Channel
         NotificationHelper.createNotificationChannel(this);
+
+        // Schedule Watering Reminder Worker
+        WateringReminderWorker.schedule(this);
 
         // Request permission for Android 13+
         checkNotificationPermission();
@@ -55,8 +61,11 @@ public class MainActivity extends ComponentActivity {
         findViewById(R.id.editPlantHome).setOnClickListener(v ->
                 startActivity(new Intent(this, EditPlantSceneActivity.class)));
 
-        findViewById(R.id.testNotificationButton).setOnClickListener(v ->
-                NotificationHelper.sendNotification(this, "GrowTime Reminder", "Don't forget to water your plants!"));
+        findViewById(R.id.testNotificationButton).setOnClickListener(v -> {
+            OneTimeWorkRequest testRequest = new OneTimeWorkRequest.Builder(WateringReminderWorker.class).build();
+            WorkManager.getInstance(this).enqueue(testRequest);
+            Toast.makeText(this, "Manual watering check triggered", Toast.LENGTH_SHORT).show();
+        });
 
         findViewById(R.id.testWeatherApiButton).setOnClickListener(v ->
                 WeatherForecastRepository.fetchSevenDayTotalPrecipitation(this,

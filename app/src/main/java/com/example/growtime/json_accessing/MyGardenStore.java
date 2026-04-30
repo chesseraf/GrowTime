@@ -128,7 +128,7 @@ public class MyGardenStore {
         saveAll(current);
     }
 
-    private void saveAll(List<StoredPlant> plants) {
+    public void saveAll(List<StoredPlant> plants) {
         JSONArray arr = new JSONArray();
         for (StoredPlant sp : plants) {
             try {

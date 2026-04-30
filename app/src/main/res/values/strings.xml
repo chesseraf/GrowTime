@@ -28,4 +28,11 @@
     <string name="water_marked_water_next">Watered. Next 7 days: %1$.1f mm — water as usual next cycle.</string>
     <string name="water_marked_forecast_failed">Watered. Forecast failed (%1$s). Rain skip not applied.</string>
     <string name="water_marked_no_rain_setup">Watered. Add API key and zip to use rain forecast.</string>
+
+    <string name="notification_watering_reminder_title">Time to water!</string>
+    <string name="notification_watering_reminder_single">Your %1$s needs water.</string>
+    <string name="notification_watering_reminder_multiple">Multiple plants need water: %1$s</string>
+    <string name="notification_rain_reset_title">Rain detected!</string>
+    <string name="notification_rain_reset_single">It rained! %1$s watering schedule reset.</string>
+    <string name="notification_rain_reset_multiple">It rained! %1$s plants had their schedules reset.</string>
 </resources>
