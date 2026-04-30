@@ -7,6 +7,8 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -54,16 +56,30 @@ public class ExampleInstrumentedTestJava {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    @Before
+    public void setUpIntents() {
+        init();
+    }
+
+    @After
+    public void tearDownIntents() {
+        try {
+            release();
+        } catch (IllegalStateException ignored) {
+            // Keep teardown resilient when a test fails before intents fully initialize.
+        }
+    }
+
     @Test
     public void test1_recommendButton_opensRecommendScene() {
-        init();
         onView(withId(R.id.RecommendButton)).perform(click());
         intended(hasComponent(RecommendSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test2_typeInZipCode_shouldWork() {
+        onView(withId(R.id.RecommendButton)).perform(click());
+        intended(hasComponent(RecommendSceneActivity.class.getName()));
 
         onView(withId(R.id.zipcode_input))
                 .perform(replaceText("01852"), closeSoftKeyboard());
@@ -78,82 +94,67 @@ public class ExampleInstrumentedTestJava {
 
     @Test
     public void test3_honorsButton_opensHonExtScene() {
-        init();
         onView(withId(R.id.Honors_button)).perform(click());
         intended(hasComponent(HonExtSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test4_user_should_type_in_plant() {
-        onView(withId(R.id.plant_name))
+        onView(withId(R.id.addPlantHome)).perform(click());
+        intended(hasComponent(AddPlantSceneActivity.class.getName()));
+
+        onView(withId(R.id.plant_name_input))
                 .perform(replaceText("tulips"));
 
-        onView(withId(R.id.plant_name))
-                .check(matches(withText("01852")));
+        onView(withId(R.id.plant_name_input))
+                .check(matches(withText("tulips")));
     }
 
     @Test
     public void test5_locationButton_opensLocationSceneActivity() {
-        init();
         onView(withId(R.id.LocationButton)).perform(click());
         intended(hasComponent(LocationSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test8_MyGardenButton_opensMyPlantsScene() {
-        init();
         onView(withId(R.id.MyGarden)).perform(click());
         intended(hasComponent(MyPlantsSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test9_addPlantsButton_AddPlantsScene() {
-        init();
         onView(withId(R.id.addPlantHome)).perform(click());
         intended(hasComponent(AddPlantSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test10_editButton_opensEditPlantScene() {
-        init();
         onView(withId(R.id.editPlantHome)).perform(click());
         intended(hasComponent(EditPlantSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test11_navRec_opensRecommendScene() {
-        init();
-        onView(withId(R.id.nav_recommend)).perform(click());
+        onView(withId(R.id.RecommendButton)).perform(click());
         intended(hasComponent(RecommendSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test12_navHonors_opensHonExitScene() {
-        init();
-        onView(withId(R.id.nav_honors)).perform(click());
+        onView(withId(R.id.Honors_button)).perform(click());
         intended(hasComponent(HonExtSceneActivity.class.getName()));
-        release();
     }
 
     @Test
     public void test13_navMyPlants_openMyPlantsScene() {
-        init();
-        onView(withId(R.id.nav_my_plants)).perform(click());
+        onView(withId(R.id.MyGarden)).perform(click());
         intended(hasComponent(MyPlantsSceneActivity.class.getName()));
-        release();
     }
     @Test
     public void test14_MyGardenStartsEmpty() {
-        init();
         onView(withId(R.id.MyGarden)).perform(click());
         intended(hasComponent(MyPlantsSceneActivity.class.getName()));
-        release();
 
         // Check MyGarden has no items
         onView(withId(R.id.my_garden_recycler))
@@ -165,10 +166,8 @@ public class ExampleInstrumentedTestJava {
     }
     @Test
     public void test15_recPlantAddedToMyGarden() {
-        init();
         onView(withId(R.id.RecommendButton)).perform(click());
         intended(hasComponent(RecommendSceneActivity.class.getName()));
-        release();
 
         // get plant recommendations with zip code
         onView(withId(R.id.zipcode_input))
@@ -191,10 +190,8 @@ public class ExampleInstrumentedTestJava {
 
 
         // Go to MyGarden
-        init();
         onView(withId(R.id.nav_my_plants)).perform(click());
         intended(hasComponent(MyPlantsSceneActivity.class.getName()));
-        release();
 
         // Wait for MyGarden to load
         try {

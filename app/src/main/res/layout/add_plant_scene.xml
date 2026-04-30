@@ -43,12 +43,14 @@
                 android:layout_marginTop="20dp"
                 android:hint="Plant picture goes here" />
 
-            <TextView
-                android:id="@+id/hard_zone"
-                android:layout_width="155dp"
+            <EditText
+                android:id="@+id/plant_name_input"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Plantname"/>
+                android:hint="Plant name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
 
             <TextView
                 android:layout_width="51dp"
@@ -57,8 +59,10 @@
                 android:hint="indoor" />
 
             <CheckBox
+                android:id="@+id/indoor_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Indoor" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,11 +70,20 @@
                 android:layout_marginTop="20dp"
                 android:hint="Watering frequency" />
 
-            <TextView
-                android:layout_width="87dp"
+            <EditText
+                android:id="@+id/water_days_input"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="# of days" />
+                android:hint="# of days"
+                android:inputType="number"
+                android:minHeight="48dp" />
+
+            <CheckBox
+                android:id="@+id/reminders_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enable reminders" />
 
             <Button
                 android:id="@+id/add_plant"
