@@ -219,22 +219,63 @@ The code for the tests is in the folder "app\src\androidTest\java\com\example\gr
 
 # 📊 Evaluation
 
-The application will be evaluated using two main metrics.
+GrowTime was evaluated using **automated UI and integration tests** built with Android’s Espresso testing framework. These tests simulate real user interactions and verify that core features of the application behave correctly.
 
-### Plant Recommendation Accuracy
+### 🧪 Testing Approach
 
-Accuracy will be calculated using:
+Our testing focuses on validating three main areas:
 
-```
-Accuracy (%) =
-(Number of correct recommendations ÷ Total recommendations) × 100
-```
+1. **Navigation and Screen Transitions**
+2. **User Input and Interaction**
+3. **Data Flow and Application State**
 
-The system is considered successful if recommendation accuracy exceeds **75%** across tested regions.
+### 🔁 Navigation & UI Flow Testing
 
-### Reminder System Accuracy
+We tested that all major navigation paths correctly open their intended screens. These include:
 
-The watering notification system will be tested by simulating weather conditions and verifying that reminders adjust correctly when rainfall occurs.
+* Recommendation screen
+* Add Plant screen
+* Edit Plant screen
+* My Garden screen
+* Location screen
+
+Each test simulates a button press and verifies that the correct activity is launched. This ensures that users can reliably move through the app without broken links or navigation errors.
+
+### ⌨️ User Input Validation
+
+We verified that user inputs are properly handled and reflected in the UI:
+
+* Entering a ZIP code correctly updates the displayed location
+* Typing a plant name correctly updates the input field
+* Submission buttons are visible and functional
+
+These tests ensure that the app responds accurately to user input and maintains a consistent interface.
+
+### 🌱 Functional Feature Testing
+
+Core features of the application were tested through realistic workflows:
+
+* A user can enter a ZIP code and receive plant recommendations
+* A recommended plant can be added to the “My Garden” collection
+* The plant appears correctly in the user’s saved plant list
+
+This confirms that the full recommendation → selection → storage pipeline works as intended.
+
+### 📦 Data & State Validation
+
+We tested how the application handles data storage and state:
+
+* The “My Garden” view correctly starts empty for new users
+* An empty state message is displayed when no plants are added
+* After adding a plant, the collection updates dynamically
+
+These tests ensure that the app maintains accurate state across user interactions.
+
+### ⚠️ Limitations of Testing
+
+* Some tests rely on timed delays (`Thread.sleep`) to wait for UI updates, which may not be fully reliable
+* External dependencies (such as APIs) are not fully mocked, so behavior may vary with network conditions
+* Testing is focused on UI and integration behavior rather than unit-level logic
 
 ---
 
